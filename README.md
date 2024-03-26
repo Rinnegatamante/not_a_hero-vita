@@ -13,6 +13,11 @@ By doing so, it's basically as if we emulate a minimalist Android environment in
 
 ## Changelog
 
+### v1.0.1
+
+- Added multilanguage support.
+- Made two trophies hidden to mimic PS4 trophy pack.
+
 ### v1.0
 
 - Initial Release.

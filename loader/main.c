@@ -62,8 +62,6 @@ static char data_path[256];
 static char fake_vm[0x1000];
 static char fake_env[0x1000];
 
-int framecap = 0;
-
 /*
 void *__wrap_calloc(uint32_t nmember, uint32_t size) { return vglCalloc(nmember, size); }
 void __wrap_free(void *addr) { vglFree(addr); };
@@ -795,6 +793,28 @@ int SDL_OpenAudio_fake(SDL_AudioSpec * desired, SDL_AudioSpec * obtained) {
 	return SDL_OpenAudio(desired, obtained);
 }
 
+void AConfiguration_getLanguage(void *config, char *outLanguage) {
+	int lang;
+	sceAppUtilSystemParamGetInt(SCE_SYSTEM_PARAM_ID_LANG, &lang);
+	switch (lang) {
+	case SCE_SYSTEM_PARAM_LANG_FRENCH:
+		strcpy(outLanguage, "fr");
+		break;
+	case SCE_SYSTEM_PARAM_LANG_GERMAN:
+		strcpy(outLanguage, "de");
+		break;
+	case SCE_SYSTEM_PARAM_LANG_ITALIAN:
+		strcpy(outLanguage, "it");
+		break;
+	case SCE_SYSTEM_PARAM_LANG_SPANISH:
+		strcpy(outLanguage, "es");
+		break;
+	default:
+		strcpy(outLanguage, "en");
+		break;
+	}
+}
+
 static so_default_dynlib default_dynlib[] = {
 	{ "glPixelStorei", (uintptr_t)&ret0},
 	{ "glDetachShader", (uintptr_t)&ret0},
@@ -810,7 +830,7 @@ static so_default_dynlib default_dynlib[] = {
 	{ "AConfiguration_delete", (uintptr_t)&ret0},
 	{ "AConfiguration_fromAssetManager", (uintptr_t)&ret0},
 	{ "AConfiguration_getCountry", (uintptr_t)&ret0},
-	{ "AConfiguration_getLanguage", (uintptr_t)&ret0},
+	{ "AConfiguration_getLanguage", (uintptr_t)&AConfiguration_getLanguage},
 	{ "AConfiguration_getUiModeType", (uintptr_t)&ret0},
 	{ "AConfiguration_new", (uintptr_t)&ret0},
 	{ "ALooper_forThread", (uintptr_t)&ret0},
@@ -3137,15 +3157,6 @@ int main(int argc, char *argv[]) {
 	SceAppUtilInitParam init_param = {0};
 	SceAppUtilBootParam boot_param = {0};
 	sceAppUtilInit(&init_param, &boot_param);
-	SceAppUtilAppEventParam eventParam;
-	sceClibMemset(&eventParam, 0, sizeof(SceAppUtilAppEventParam));
-	sceAppUtilReceiveAppEvent(&eventParam);
-	if (eventParam.type == 0x05) {
-		char buffer[2048];
-		sceAppUtilAppEventParseLiveArea(&eventParam, buffer);
-		if (strstr(buffer, "custom"))
-			framecap = 1;
-	}
 	
 	sceTouchSetSamplingState(SCE_TOUCH_PORT_FRONT, SCE_TOUCH_SAMPLING_STATE_START);
 	sceTouchSetSamplingState(SCE_TOUCH_PORT_BACK, SCE_TOUCH_SAMPLING_STATE_START);
