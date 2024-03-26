@@ -1669,18 +1669,18 @@ SDL_Joystick *SDL_GameControllerGetJoystick_hook(SDL_GameController *g) {
 }
 
 const char *achievements[] = {
-	"MEGALORD",
-	"I'M THE KING",
-	"HEAD OF STATE",
-	"KEY TO THE CITY",
-	"GET THE CHOPPA!",
-	"EXECUTIONER",
-	"DEAD EYE",
-	"BARE CARDIO",
-	"OVERKILL",
-	"EASTERN PROMISE",
-	"YIPPEE KI YAY",
-	"MYSTERY DOOR"
+	"MEGALORD", // MEGALORD
+	"KING_OF_ENGLAND", // I'M THE KING
+	"PRIMINISTER", // HEAD OF STATE
+	"MAYOR", // KEY TO THE CITY
+	"GET_THE_CHOPPA", // GET THE CHOPPA!
+	"EXECUTIONER", // EXECUTIONER
+	"DEAD_EYE", // DEAD EYE
+	"KILL_UPGRAYDD", // BARE CARDIO
+	"KILL_BOGDAN", // OVERKILL
+	"EASTERN_PROMISE", // EASTERN PROMISE
+	"YIPPEE_KAI_AY", // YIPPEE KI YAY
+	"MYSTERY_DOOR" // MYSTERY DOOR
 };
 
 void platform_unlock_achievement(const char **ach_name) {

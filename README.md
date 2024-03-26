@@ -17,6 +17,7 @@ By doing so, it's basically as if we emulate a minimalist Android environment in
 
 - Added multilanguage support.
 - Made two trophies hidden to mimic PS4 trophy pack.
+- Fixed a bug causing some trophies to not properly unlock.
 
 ### v1.0
 
