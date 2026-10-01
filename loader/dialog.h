@@ -7,6 +7,8 @@ char *get_ime_dialog_result(void);
 int init_msg_dialog(const char *msg);
 int get_msg_dialog_result(void);
 
+void warning(const char *msg);
+
 void fatal_error(const char *fmt, ...) __attribute__((noreturn));
 
 #endif

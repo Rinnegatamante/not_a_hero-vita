@@ -26,6 +26,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <fcntl.h>
 #include <pthread.h>
 #include <wchar.h>
 #include <wctype.h>
@@ -44,6 +45,7 @@
 #include "dialog.h"
 #include "so_util.h"
 #include "sha1.h"
+#include "trophies.h"
 
 //#define ENABLE_DEBUG
 
@@ -525,7 +527,6 @@ extern void *__cxa_finalize;
 extern void *__cxa_call_unexpected;
 extern void *__gnu_unwind_frame;
 extern void *__stack_chk_fail;
-int open(const char *pathname, int flags);
 
 static int __stack_chk_guard_fake = 0x42424242;
 
@@ -1586,7 +1587,7 @@ void *CallObjectMethod(void *env, void *obj, int methodID, uintptr_t *args) {
 void *CallObjectMethodV(void *env, void *obj, int methodID, uintptr_t *args) {
 	switch (methodID) {
 	default:
-		return 0x34343434;
+		return (void *)(uintptr_t)0x34343434;
 	}
 }
 
